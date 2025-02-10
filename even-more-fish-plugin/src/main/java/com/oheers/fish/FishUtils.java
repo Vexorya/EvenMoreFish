@@ -338,23 +338,12 @@ public class FishUtils {
 
     public static void broadcastFishMessage(AbstractMessage message, Player referencePlayer, boolean actionBar) {
         String formatted = message.getLegacyMessage();
-        Competition activeComp = Competition.getCurrentlyActive();
 
-        if (formatted.isEmpty() || activeComp == null) {
+        if (formatted.isEmpty()) {
             return;
         }
 
-        CompetitionFile activeCompetitionFile = activeComp.getCompetitionFile();
-
-        int rangeSquared = activeCompetitionFile.getBroadcastRange(); // 10 blocks squared
-
         Collection<? extends Player> validPlayers = Bukkit.getOnlinePlayers();
-
-        if (rangeSquared > -1) {
-            validPlayers = validPlayers.stream()
-                    .filter(player -> isWithinRange(referencePlayer, player, rangeSquared))
-                    .toList();
-        }
 
         if (actionBar) {
             validPlayers.forEach(message::sendActionBar);

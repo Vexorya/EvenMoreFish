@@ -42,7 +42,7 @@ import java.util.logging.Level;
 public class FishingProcessor implements Listener {
     private final DecimalFormat decimalFormat = new DecimalFormat("#.0");
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true) // WHY, GOD NO, WHY, WHY THE FUCK WOULD YOU DO THIS
     public void process(PlayerFishEvent event) {
         if (!isCustomFishAllowed(event.getPlayer())) {
             return;
